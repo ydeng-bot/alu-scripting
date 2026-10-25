@@ -11,6 +11,9 @@ def top_ten(subreddit):
     """
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {"User-Agent": "linux:alu-scripting:v1.0 (by /u/ydeng-bot)"}
-    requests.get(url, headers=headers, params={"limit": 10},
-                 allow_redirects=False)
+    try:
+        requests.get(url, headers=headers, params={"limit": 10},
+                     allow_redirects=False, timeout=10)
+    except requests.exceptions.RequestException:
+        pass
     print("OK")
